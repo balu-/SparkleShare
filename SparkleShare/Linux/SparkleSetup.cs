@@ -70,12 +70,15 @@ namespace SparkleShare {
                     Xalign = 0,
                     ActivatesDefault = true
                 };
-
-                //UnixUserInfo user_info = UnixUserInfo.GetRealUser ();
                 
-                //if (user_info != null && user_info.RealName != null)
-                //    name_entry.Text = user_info.RealName.TrimEnd (",".ToCharArray ());
-
+                try{
+                    UnixUserInfo user_info = UnixUserInfo.GetRealUser ();
+                
+                    if (user_info != null && user_info.RealName != null)
+                        name_entry.Text = user_info.RealName.TrimEnd (",".ToCharArray ());
+                } catch (System.ArgumentException e){
+                    //ignore if could not get userName
+                }
                 Entry email_entry = new Entry () {
                     Xalign = 0,
                     ActivatesDefault = true
